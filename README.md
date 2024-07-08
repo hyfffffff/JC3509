@@ -86,9 +86,8 @@ The project involves classifying data into three categories based on the chemica
 - **Softmax: Transforming Network Inputs into Probabilities**
 
     Consider a set of logits, which are the raw output values from the network for each class. The softmax function for a specific logit ![image](https://github.com/hyfffffff/JC3509/assets/108557638/c64a70c7-13bc-49fc-808a-61e33ecf5470)
- \(z_i\) is defined as:
+ is defined as:
 
-    \[ \text{softmax}(z_i) = \frac{e^{z_i}}{\sum_{k=1}^K e^{z_k}} \]
   ![image](https://github.com/hyfffffff/JC3509/assets/108557638/5e2d1933-1401-48f3-90f5-e8254d9bf225)
 
 
@@ -98,7 +97,8 @@ The project involves classifying data into three categories based on the chemica
 
     The cross-entropy loss function quantifies the difference between the predicted probability distribution and the actual distribution. Given a true class label (in one-hot encoding) and the predicted probability distribution, the cross-entropy loss \(L\) is calculated as:
 
-    \[ L = -\sum_{i=1}^K y_i \cdot \log(p_i) \]
+          ![image](https://github.com/hyfffffff/JC3509/assets/108557638/94c3b969-aa8a-49bc-b0e5-d8c5a79fcd02)
+
 
     In this formula, the sum iterates over all \(K\) classes, where \(y_i\) is 1 for the correct class and 0 for the others, and \(p_i\) is the predicted probability for class \(i\). The loss increases when the predicted probability for the correct class is low, effectively penalizing incorrect predictions, and decreases when the predicted probability is high, reflecting more accurate predictions.
 
@@ -108,11 +108,13 @@ The project involves classifying data into three categories based on the chemica
 
     During backpropagation, the method for updating the model’s weights becomes surprisingly straightforward when combining softmax and cross-entropy. For any specific output, the required adjustment (the gradient) simplifies to:
 
-    \[ \frac{\partial L}{\partial z_i} = p_i - y_i \]
+          ![image](https://github.com/hyfffffff/JC3509/assets/108557638/34bb7660-2afb-4525-8661-72b87390da7b)
+
 
     In multi-class scenarios, where \( \mathbf{p} \) represents the model's predicted probabilities and \( \mathbf{y} \) the true labels, the gradient across all outputs is merely the difference between these vectors:
 
-    \[ \mathbf{d_{z}} = \mathbf{p} - \mathbf{y} \]
+          ![image](https://github.com/hyfffffff/JC3509/assets/108557638/a2878d91-c4b8-4001-9852-bddac358d4f9)
+
 
     This computational simplicity stems from the logarithmic and exponential mathematical properties inherent in the softmax and cross-entropy formulas. The gradient calculation can be completed with one subtraction, which is the attraction of the softmax cross-entropy loss function.
 
@@ -154,20 +156,20 @@ There are four main classes involved in building neural networks: `BasicLayer`, 
 
 In neural networks, understanding how to update model parameters requires grasping the gradients of both matrices (weights \(W\) and biases \(b\)) and the ReLU activation function. For a layer's output defined as \( Z = XW + b \), where \( X \) represents the input matrix, \( W \) the weight matrix, and \( b \) the bias vector, the gradients are crucial for backpropagation. The gradient of the loss \( L \) with respect to the weights \( W \) is calculated as:
 
-\[ \frac{\partial L}{\partial W} = X^T \frac{\partial L}{\partial Z} \]
+    ![image](https://github.com/hyfffffff/JC3509/assets/108557638/8e19e930-060e-4d04-bd2a-a2aacc4dcae9)
+
 
 Similarly, the gradient with respect to the bias \( b \) is:
 
-\[ \frac{\partial L}{\partial b} = \sum \frac{\partial L}{\partial Z} \]
+    ![image](https://github.com/hyfffffff/JC3509/assets/108557638/932e8441-c1ca-4fdf-8a1d-124b41c3bb5f)
 
-These equations show how adjustments to \( W \) and \( b \) are guided by the input \( X \) and the loss gradient \( \frac{\partial L}{\partial Z} \).
+These equations show how adjustments to \( W \) and \( b \) are guided by the input \( X \) and the loss gradient ![image](https://github.com/hyfffffff/JC3509/assets/108557638/223d63e7-b530-47d1-8ed9-bdf468d24968)
+.
 
 For the ReLU (Rectified Linear Unit) function, widely used for its computational efficiency and ability to mitigate the vanishing gradient problem, the derivative is defined as:
 
-\[ \frac{\partial \text{ReLU}}{\partial x} = \begin{cases} 
-1 & \text{if } x > 0 \\
-0 & \text{otherwise}
-\end{cases} \]
+    ![image](https://github.com/hyfffffff/JC3509/assets/108557638/387bef0d-0c78-4c91-a69d-02d58e0a8e45)
+
 
 **The conclusion drawn from the above derivation formula is that whether it is a matrix or ReLU, its gradient is related to its own input and the gradient of the next layer.** As long as you know the gradient of the next layer and its own input, you can easily calculate its own gradient.
 
@@ -248,17 +250,19 @@ Regularisation essentially introduces a bias-variance trade-off, promoting model
 #### Adjusting Gradients with L1 and L2 Penalties
 
 L1 regularisation adds a penalty equal to the absolute value of the magnitude of coefficients to the loss function. The L1 penalty term is given by:
-\[ L1(\mathbf{w}) = \lambda \sum_{i} |w_i| \]
+        ![image](https://github.com/hyfffffff/JC3509/assets/108557638/d5d6e5d9-86cd-44f9-9590-e12a9f56c925)
 
 The gradient of the L1 term with respect to the weight \( w_i \) is:
-\[ \frac{\partial L1(\mathbf{w})}{\partial w_i} = \lambda \cdot \text{sign}(w_i) \]
+        ![image](https://github.com/hyfffffff/JC3509/assets/108557638/ff398fc5-09d8-4faa-8ad7-1015fa58b7fb)
+
 where \(\text{sign}(w_i)\) is a function that returns \(1\) if \(w_i > 0\), \(-1\) if \(w_i < 0\), and is undefined (or zero in some implementations) if \(w_i = 0\).
 
 L2 regularisation adds a penalty equal to the square of the magnitude of coefficients to the loss function. The L2 penalty term is:
-\[ L2(\mathbf{w}) = \lambda \sum_{i} w_i^2 \]
+        ![image](https://github.com/hyfffffff/JC3509/assets/108557638/1c5b44aa-aa14-49f7-8659-bb16d144ad0c)
 
 The gradient of the L2 term with respect to the weight \( w_i \) is:
-\[ \frac{\partial L2(\mathbf{w})}{\partial w_i} = 2 \lambda w_i \]
+        ![image](https://github.com/hyfffffff/JC3509/assets/108557638/cbc01e5b-eb1b-44c9-9d37-7b7733f30f82)
+
 
 #### Code to implentation L1 and L2
 
