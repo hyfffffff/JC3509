@@ -36,7 +36,7 @@ The `preprocess_data` function loads the data file, preprocesses it, and returns
 Data files are loaded using pandas. Given the possibility of erroneous data in text files, it is critical to verify the accuracy of the data after loading. I initially checked the data type of each column in the DataFrame. If the text file contains invalid data, pandas cannot perform data conversion and the columns will be of object type. The missing object type column indicates clean data.
 
 The function `showdata` uses seaborn to visualize the data. The data graph is like this. Everything is fine, the next step is to perform data conversion.
-![alt text](image.png)
+![image](https://github.com/hyfffffff/JC3509/assets/108557638/e6eefbeb-64a7-4571-9038-1c42a588372a)
 
 ### Dividing Data into Training and Validation Set
 
