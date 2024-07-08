@@ -388,7 +388,8 @@ In Task 3, I trained three models with the same structure: an input layer (13, 1
     | Macro avg    | 0.94      | 0.97   | 0.95     | 45      |
     | Weighted avg | 0.96      | 0.96   | 0.96     | 45      |
 
-![model 1 matrix](matrix-roc-none.png)
+![image](https://github.com/hyfffffff/JC3509/assets/108557638/6aa5415a-84ca-4d18-b0a5-4331ff63ede4)
+
 
 - Model 2 result
   
@@ -401,7 +402,8 @@ In Task 3, I trained three models with the same structure: an input layer (13, 1
     | Macro avg | 0.95      | 0.94   | 0.94     | 45      |
     | Weighted avg | 0.93  | 0.93   | 0.93     | 45      |
 
-![model 2 matrix](matrix-roc-l2.png)
+![image](https://github.com/hyfffffff/JC3509/assets/108557638/4a05d09d-42ac-41e2-92f9-74ed0282cb0a)
+
 
 - Model 3 result
   
@@ -414,7 +416,8 @@ In Task 3, I trained three models with the same structure: an input layer (13, 1
     | Macro avg | 0.94      | 0.97   | 0.95     | 45      |
     | Weighted avg | 0.96  | 0.96   | 0.96     | 45      |
 
-![model 3 matrix](matrix-roc-l1.png)
+![image](https://github.com/hyfffffff/JC3509/assets/108557638/ce7fea88-ccc8-4c9a-8b54-d6c655d7fdfb)
+
 
 ### Plot Result
 
@@ -422,7 +425,8 @@ During each training session, the program records the loss and accuracy for ever
 
 #### Analysis of Unregularized Model Graphs
 
-![resultlnone-1000](resultnone-1000.png)
+![image](https://github.com/hyfffffff/JC3509/assets/108557638/7e902106-0e9c-4bc4-aa35-5838192777bd)
+
 
 Analyzing the provided graphs reveals key insights into the model's performance:
 
@@ -433,9 +437,11 @@ Analyzing the provided graphs reveals key insights into the model's performance:
 
 #### Analysis of L1 and L2 Regularized Model Graphs
 
-![resultl2-2000](resultl2-2000.png)
+![image](https://github.com/hyfffffff/JC3509/assets/108557638/0241d064-6b16-4dfd-b5f1-054f2e63dced)
 
-![resultl1-2000](resultl1-2000.png)
+
+![image](https://github.com/hyfffffff/JC3509/assets/108557638/d4d8a377-267e-4485-8ac4-12720b510d00)
+
 
 Analyzing the two sets of graphs for the models with L1 and L2 regularization, the following observations and conclusions can be made:
 
@@ -475,11 +481,13 @@ There is room to improve in distinguishing Producer 2's products a bit better an
 
 To determine which features are most critical for classification, I sought information on the internet and learned that examining the size of parameters or gradients at the model's input layer could indicate feature importance. However, each training session yielded different results due to the model being initialized with random values, leading to various outcomes based on these initial settings. To identify the most important features, I trained an L1 regularized model 300 times, conducting 250 epochs for each session. After obtaining a model, I recorded the size of the input layer's parameters and the cumulative gradient values, organizing and storing this data by rank. Finally, I used this information to create heatmaps. The heatmaps, based on the ranked cumulative gradient values, effectively illustrated the significance of each feature.
 
-![headmap](heatmapfinal.png)
+![image](https://github.com/hyfffffff/JC3509/assets/108557638/ba4d7b05-eeff-4d3c-8660-bb38f9f9fd95)
+
 
 From the heatmap, it's observed that features 12 and 6 are the most influential factors affecting classification. Feature 12 corresponds to 'Proline', which measures the proline amino acids content, and feature 6 relates to 'Flavanoids', measuring the flavonoid phenols in the product. These two features stand out as the most significant in determining the classification outcome.The figure below sorts the features by their importance and shows the data distribution of each feature.Some features show almost no overlap between producers (like "Flavanoids" and "Proline"), which means they could be very good predictors for identifying the producer.
 
-![importfeatures](sorted_features.png)
+![image](https://github.com/hyfffffff/JC3509/assets/108557638/05d0d80f-dff8-4be2-a039-e7153694b313)
+
 
 ## Future work
 
