@@ -85,9 +85,12 @@ The project involves classifying data into three categories based on the chemica
 
 - **Softmax: Transforming Network Inputs into Probabilities**
 
-    Consider a set of logits, which are the raw output values from the network for each class. The softmax function for a specific logit \(z_i\) is defined as:
+    Consider a set of logits, which are the raw output values from the network for each class. The softmax function for a specific logit ![image](https://github.com/hyfffffff/JC3509/assets/108557638/c64a70c7-13bc-49fc-808a-61e33ecf5470)
+ \(z_i\) is defined as:
 
     \[ \text{softmax}(z_i) = \frac{e^{z_i}}{\sum_{k=1}^K e^{z_k}} \]
+  ![image](https://github.com/hyfffffff/JC3509/assets/108557638/5e2d1933-1401-48f3-90f5-e8254d9bf225)
+
 
     This equation takes the exponential of the logit \(z_i\) to ensure it's positive, then normalizes this value by dividing it by the sum of exponentials for all \(K\) logits. The result is a probability distribution where all the probabilities add up to one.
 
